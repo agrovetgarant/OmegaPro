@@ -1,0 +1,873 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Анализ эффективности: ОмегаПро</title>
+    <style>
+        :root {
+            --primary-color: #2c7a4b;
+            --primary-light: #e8f5e9;
+            --accent-color: #2196f3;
+            --accent-light: #e3f2fd;
+            --warning-color: #ff9800;
+            --danger-color: #d9534f;
+            --text-color: #333;
+            --text-light: #666;
+            --border-color: #e0e0e0;
+            --shadow-sm: 0 2px 4px rgba(0,0,0,0.08);
+            --shadow-md: 0 4px 8px rgba(0,0,0,0.12);
+            --shadow-lg: 0 8px 16px rgba(0,0,0,0.15);
+            --radius-sm: 6px;
+            --radius-md: 10px;
+            --radius-lg: 14px;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Roboto', 'Helvetica Neue', sans-serif;
+            line-height: 1.5;
+            color: var(--text-color);
+            margin: 0;
+            padding: 30px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        /* A4 Paper */
+        .page {
+            width: 210mm;
+            min-height: 297mm;
+            padding: 20mm;
+            margin: 0 auto 30px auto;
+            background: white;
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-lg);
+            box-sizing: border-box;
+            position: relative;
+        }
+
+        /* Typography */
+        h1 {
+            font-size: 20pt;
+            text-align: center;
+            color: var(--primary-color);
+            margin: 0 0 25px 0;
+            padding-bottom: 15px;
+            border-bottom: 3px solid var(--primary-color);
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+
+        h2 {
+            font-size: 14pt;
+            color: var(--primary-color);
+            margin: 25px 0 12px 0;
+            padding-bottom: 6px;
+            border-bottom: 2px solid var(--border-color);
+            font-weight: 600;
+        }
+
+        h3 {
+            font-size: 11pt;
+            color: var(--text-color);
+            margin: 15px 0 8px 0;
+            font-weight: 600;
+        }
+
+        /* Modern Calculator */
+        .calculator-section {
+            background: linear-gradient(135deg, var(--primary-light) 0%, #ffffff 100%);
+            padding: 20px;
+            border-radius: var(--radius-lg);
+            border: 1px solid rgba(44, 122, 75, 0.15);
+            margin-bottom: 25px;
+            box-shadow: var(--shadow-md);
+        }
+
+        .calculator-section h2 {
+            margin-top: 0;
+            font-size: 13pt;
+            border: none;
+            padding: 0;
+        }
+
+        .input-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 14px;
+            margin-bottom: 15px;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .input-group label {
+            font-size: 9pt;
+            font-weight: 600;
+            color: var(--text-light);
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+
+        .input-group input {
+            padding: 10px 12px;
+            border: 2px solid var(--border-color);
+            border-radius: var(--radius-sm);
+            font-size: 10pt;
+            width: 100%;
+            box-sizing: border-box;
+            transition: all 0.3s ease;
+            background: white;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(44, 122, 75, 0.15);
+        }
+
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+            margin-top: 15px;
+        }
+
+        .result-card {
+            background: white;
+            padding: 12px 10px;
+            border-radius: var(--radius-md);
+            text-align: center;
+            font-size: 9pt;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border-color);
+            transition: transform 0.2s ease;
+        }
+
+        .result-card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .result-card.profit {
+            background: linear-gradient(135deg, #fff5f5 0%, #ffffff 100%);
+            border-color: var(--danger-color);
+        }
+
+        .result-card.highlight {
+            background: linear-gradient(135deg, var(--accent-light) 0%, #ffffff 100%);
+            border-color: var(--accent-color);
+        }
+
+        .result-value {
+            font-weight: 700;
+            color: var(--primary-color);
+            display: block;
+            font-size: 12pt;
+            margin-top: 4px;
+        }
+
+        .result-card.profit .result-value {
+            color: var(--danger-color);
+        }
+
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 12px 0;
+            font-size: 9pt;
+            border-radius: var(--radius-sm);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+        }
+
+        th, td {
+            border: 1px solid var(--border-color);
+            padding: 8px 10px;
+            text-align: left;
+        }
+
+        th {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #3d9966 100%);
+            color: white;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 8pt;
+            letter-spacing: 0.5px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        tr:hover {
+            background-color: var(--primary-light);
+        }
+
+        /* Content Blocks */
+        ul {
+            list-style: none;
+            padding-left: 0;
+            margin: 8px 0;
+            font-size: 10pt;
+        }
+
+        ul li {
+            padding: 4px 0 4px 20px;
+            position: relative;
+        }
+
+        ul li:before {
+            content: "•";
+            color: var(--primary-color);
+            font-weight: bold;
+            position: absolute;
+            left: 5px;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, var(--primary-light) 0%, #ffffff 100%);
+            border-left: 5px solid var(--primary-color);
+            padding: 12px 15px;
+            margin: 15px 0;
+            font-size: 10pt;
+            border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .component-block {
+            background: white;
+            border: 1px solid var(--border-color);
+            padding: 14px;
+            margin-bottom: 12px;
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-sm);
+            transition: box-shadow 0.3s ease;
+        }
+
+        .component-block:hover {
+            box-shadow: var(--shadow-md);
+        }
+
+        .component-title {
+            font-weight: 700;
+            font-size: 11pt;
+            color: var(--primary-color);
+            margin-bottom: 8px;
+            display: block;
+            padding-bottom: 6px;
+            border-bottom: 1px dashed var(--border-color);
+        }
+
+        /* Product Description Box */
+        .product-description {
+            background: linear-gradient(135deg, var(--primary-light) 0%, #ffffff 100%);
+            border: 2px solid var(--primary-color);
+            padding: 18px 20px;
+            margin: 20px 0;
+            font-size: 10pt;
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-md);
+        }
+
+        .product-description h3 {
+            color: var(--primary-color);
+            margin-top: 0;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 8px;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-top: 12px;
+        }
+
+        .product-feature {
+            background: white;
+            padding: 10px;
+            border-radius: var(--radius-sm);
+            border-left: 3px solid var(--primary-color);
+        }
+
+        .product-feature strong {
+            color: var(--primary-color);
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        /* Key Messages Box */
+        .key-messages {
+            background: linear-gradient(135deg, var(--accent-light) 0%, #ffffff 100%);
+            border-left: 5px solid var(--accent-color);
+            padding: 15px 18px;
+            margin: 20px 0;
+            font-size: 10pt;
+            border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+            box-shadow: var(--shadow-sm);
+        }
+
+        /* Print Styles */
+        @media print {
+            body {
+                background: white;
+                margin: 0;
+                padding: 0;
+            }
+            .page {
+                margin: 0;
+                box-shadow: none;
+                border-radius: 0;
+                width: 100%;
+                padding: 15mm;
+                page-break-after: always;
+            }
+            .page:last-child {
+                page-break-after: auto;
+            }
+            .calculator-section, .product-description {
+                background: #f5f5f5 !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+            .highlight-box, .key-messages {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+            th {
+                background: var(--primary-color) !important;
+                color: white !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+            .result-card.profit {
+                background: #fff5f5 !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+            .result-card.highlight {
+                background: #e3f2fd !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+            table, .component-block, .calculator-section, .highlight-box, .key-messages, .product-description {
+                page-break-inside: avoid;
+            }
+            .input-group input {
+                border: 1px solid #ccc;
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 850px) {
+            body {
+                padding: 10px;
+            }
+            .page {
+                width: 100%;
+                padding: 15mm;
+            }
+            .input-grid, .product-grid {
+                grid-template-columns: repeat(1, 1fr);
+            }
+            .results-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- PAGE 1 -->
+<div class="page">
+    <h1>📊 Анализ эффективности: ОмегаПро</h1>
+
+    <div class="content-section">
+        
+        <!-- 1. О ПРОДУКТЕ -->
+        <div class="product-description">
+            <h3>📦 О продукте «ОмегаПро»</h3>
+            <p style="margin: 10px 0;"><strong>ОмегаПро</strong> — это специализированный концентрат для высокопродуктивных коров в период 0–65 дней лактации. Продукт разработан для поддержки животных в период отрицательного баланса энергии и максимального раскрытия генетического потенциала.</p>
+            
+            <div class="product-grid">
+                <div class="product-feature">
+                    <strong>🌱 Базовая матрица (80%)</strong>
+                    Соя микронизированная (160 г/кг) + Лён двойной обработки (640 г/кг)
+                </div>
+                <div class="product-feature">
+                    <strong>⚗️ Функциональный комплекс (20%)</strong>
+                    Амилаза + Защищённый холин + Адсорбент + Живые дрожжи
+                </div>
+                <div class="product-feature">
+                    <strong>🎯 Назначение</strong>
+                    Поддержка пика лактации, профилактика кетоза, улучшение репродукции
+                </div>
+                <div class="product-feature">
+                    <strong>📈 Ожидаемый эффект</strong>
+                    +2,0 л молока/день, +0,20 п.п. жирности, ROI 138–185%
+                </div>
+            </div>
+        </div>
+
+        <!-- 2. СОСТАВ КОНЦЕНТРАТА -->
+        <h2>🧬 2️⃣ Состав концентрата (детализация)</h2>
+        <div class="component-block">
+            <span class="component-title">📦 1 кг концентрата «ОмегаПро»</span>
+            <ul>
+                <li><strong>🔹 БАЗОВАЯ МАТРИЦА (80% = 800 г)</strong>
+                    <ul>
+                        <li>Соя микронизированная: 20% от базы = 160 г/кг продукта</li>
+                        <li>Лён двойной обработки*: 80% от базы = 640 г/кг продукта</li>
+                    </ul>
+                </li>
+                <li><strong>🔹 ФУНКЦИОНАЛЬНЫЙ КОМПЛЕКС (20% = 200 г)</strong>
+                    <ul>
+                        <li>Румистар 600 (α-амилаза): ~10–15 г</li>
+                        <li>ХолиТаргет (защищённый холин 30%): ~25–30 г → 9 г чистого холина</li>
+                        <li>ЛАСОРБ (адсорбент микотоксинов): ~4–5 г</li>
+                        <li>АКТИВ ИСТ+ (живые дрожжи): ~70–75 г</li>
+                    </ul>
+                </li>
+            </ul>
+            <p style="font-size: 9pt; color: var(--text-light); margin-top: 10px;"><em>* Микронизация + последующая экструзия для защиты Омега-3</em></p>
+        </div>
+
+        <!-- 3. ДЕЙСТВИЕ КОМПОНЕНТОВ ИЗ СОИ -->
+        <h2>🌱 3️⃣ Действие компонентов из сои</h2>
+        <div class="component-block">
+            <span class="component-title">Микронизированная мука (160 г/кг продукта)</span>
+            <p style="font-size: 10pt; margin: 8px 0;"><strong>🔬 Технология микронизации:</strong><br>
+            Инфракрасный нагрев (120–140°С) → вибрация молекул воды внутри зерна → микровзрывы клеточных стенок → повышение доступности нутриентов.</p>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>Эффект</th>
+                        <th>Механизм</th>
+                        <th>Практическая ценность</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>↑ Доля транзитного протеина (RUP)</td>
+                        <td>Денатурация белков → защита от распада в рубце</td>
+                        <td>+15–25% RUP → лучшее аминокислотное снабжение молочной железы</td>
+                    </tr>
+                    <tr>
+                        <td>Инактивация ингибиторов трипсина</td>
+                        <td>Термообработка разрушает антипитательные факторы</td>
+                        <td>Улучшение переваримости белка на 8–12%, профилактика диарей у телят</td>
+                    </tr>
+                    <tr>
+                        <td>Повышение энергии корма</td>
+                        <td>Гелеобразование крахмала → лучшая ферментация</td>
+                        <td>+0,2–0,4 МДж ОБ/кг СВ → поддержка отрицательного баланса энергии</td>
+                    </tr>
+                    <tr>
+                        <td>Стабильность при хранении</td>
+                        <td>Инактивация липоксигеназы → защита от прогоркания</td>
+                        <td>Срок хранения концентрата до 6 месяцев без потери качества</td>
+                    </tr>
+                </tbody>
+            </table>
+            <p style="font-size: 10pt; margin: 10px 0 0 0;"><strong>📊 Вклад в продуктивность (при вводе 1,2 кг/день):</strong></p>
+            <ul>
+                <li>Транзитный протеин: +25–30 г/ гол./ день → поддержка синтеза молока</li>
+                <li>Энергия: +0,3–0,5 МДж/ гол./ день → снижение мобилизации жировых запасов</li>
+                <li>Косвенный эффект на удой: + 0,2–0,4 кг/день</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!-- PAGE 2 -->
+<div class="page">
+    <!-- 4. ДЕЙСТВИЕ КОМПОНЕНТОВ ИЗ ЛЬНА -->
+    <h2>🌿 4️⃣ Действие компонентов из льна</h2>
+    <div class="component-block">
+        <span class="component-title">Двойная обработка: микронизация + экструзия (640 г/кг продукта)</span>
+        <p style="font-size: 10pt; margin: 8px 0;"><strong>🔬 Технология Double Processing:</strong><br>
+        Этап 1: Микронизация → разрушение клеточных стенок, инактивация линамаразы.<br>
+        Этап 2: Экструзия → формирование липидно-белковой матрицы, «капсулирование» жиров.<br>
+        Результат: защита Омега-3 от биогидрогенизации в рубце на 60–70%.</p>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Эффект</th>
+                    <th>Механизм</th>
+                    <th>Практическая ценность</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>🛡️ Защита Омега-3 (АЛК)</td>
+                    <td>Липидная капсула → доставка в тонкий кишечник</td>
+                    <td>120–140 г АЛК/кг продукта → противовоспалительный эффект, улучшение качества ооцитов</td>
+                </tr>
+                <tr>
+                    <td>⚡ Bypass Fat (транзитный жир)</td>
+                    <td>Защищённые жирные кислоты → прямое включение в синтез молока</td>
+                    <td>160–180 г/кг продукта → концентрированная энергия без нагрузки на рубец</td>
+                </tr>
+                <tr>
+                    <td>🔄 Репродуктивная поддержка</td>
+                    <td>АЛК подавляет синтез PGF 2α → сохранение жёлтого тела</td>
+                    <td>Овуляция на +10–14 дней раньше → сокращение сервис-периода</td>
+                </tr>
+                <tr>
+                    <td>🛡️ Буферный эффект для рубца</td>
+                    <td>Слизистые полисахариды льна → обволакивающее действие</td>
+                    <td>Профилактика субклинического ацидоза при высококонцентратном кормлении</td>
+                </tr>
+                <tr>
+                    <td>🧈 Влияние на жирность молока</td>
+                    <td>Транзитные жирные кислоты (С18:1, С18:3) → субстрат для синтеза молочного жира</td>
+                    <td>+0,08–0,12 п.п. к жирности</td>
+                </tr>
+            </tbody>
+        </table>
+        <p style="font-size: 10pt; margin: 10px 0 0 0;"><strong>📊 Вклад в продуктивность (при вводе 1,2 кг/день):</strong></p>
+        <ul>
+            <li><strong>Bypass Fat:</strong> +190–215 г/гол./день → энергетическая поддержка пика лактации</li>
+            <li><strong>Омега-3 (АЛК):</strong> +145–170 г/гол./день → репродукция + противовоспалительный эффект</li>
+            <li><strong>Косвенный эффект на удой:</strong> +0,8–1,2 кг/день</li>
+            <li><strong>Эффект на жирность:</strong> +0,10–0,15 п.п.</li>
+        </ul>
+    </div>
+
+    <!-- 5. ДЕЙСТВИЕ КОМПОНЕНТОВ ФУНКЦИОНАЛЬНОГО КОМПЛЕКСА -->
+    <h2>⚗️ 5️⃣ Действие компонентов функционального комплекса</h2>
+    <p style="font-size: 10pt; font-style: italic; color: var(--text-light);">Не «витаминный микс», а целевая матрица метаболической поддержки (20% состава)</p>
+
+    <div class="component-block">
+        <span class="component-title">🔹 Румистар 600 (α-амилаза)</span>
+        <ul>
+            <li><strong>Действующее вещество:</strong> Альфа-амилаза из <em>Bacillus licheniformis</em></li>
+            <li><strong>Механизм:</strong> Гидролиз крахмала до олигосахаридов → ускоренное брожение в рубце + лучшее всасывание глюкозы в кишечнике</li>
+            <li><strong>Эффекты:</strong> Переваримость крахмала +5–12%, Стабилизация рН рубца, +0,2–0,4 кг молока/день</li>
+        </ul>
+    </div>
+
+    <div class="component-block">
+        <span class="component-title">🔹 ХолиТаргет (защищённый холин-хлорид, 30%)</span>
+        <ul>
+            <li><strong>Технология:</strong> Микрокапсулирование гидрогенизированным пальмовым маслом → защита от распада в рубце (80–85% bypass)</li>
+            <li><strong>Механизм:</strong> Холин → синтез фосфатидилхолина → экспорт триглицеридов из печени в форме ЛПОНП</li>
+            <li><strong>Эффекты:</strong> Профилактика жировой инфильтрации печени и кетоза (снижение риска на 30–40%), Поддержка синтеза молока (+0,5–0,8 кг/день), Улучшение качества ооцитов</li>
+        </ul>
+    </div>
+
+    <div class="component-block">
+        <span class="component-title">🔹 ЛАСОРБ (комбинированный адсорбент)</span>
+        <ul>
+            <li><strong>Состав:</strong> Бентонит-монтмориллонит + сепиолит + инактивированные дрожжи <em>S. cerevisiae</em></li>
+            <li><strong>Механизм:</strong> Минеральная фракция связывает полярные токсины, Органическая фракция связывает неполярные токсины.</li>
+            <li><strong>Эффекты:</strong> Защита печени, Сохранение удоя при скрытом микотоксикозе (+0,3–0,5 кг/день), Пребиотический эффект.</li>
+        </ul>
+    </div>
+
+    <div class="component-block">
+        <span class="component-title">🔹 АКТИВ ИСТ+ (живые термоустойчивые дрожжи)</span>
+        <ul>
+            <li><strong>Штамм:</strong> <em>Saccharomyces cerevisiae</em> М 207177, ≥ 2×10¹⁰ КОЕ / г</li>
+            <li><strong>Механизм:</strong> Потребление кислорода в рубце → создание анаэробных условий для целлюлолитических бактерий</li>
+            <li><strong>Эффекты:</strong> Стабилизация рН рубца (6,2–6,8), Переваримость клетчатки +5–12%, Потребление СВ +3–8%.</li>
+        </ul>
+    </div>
+
+    <!-- 6. СИНЕРГИЯ ФУНКЦИОНАЛЬНОГО КОМПЛЕКСА -->
+    <h2>📊 6️⃣ Синергия функционального комплекса (при вводе 1,2 кг/день)</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Компонент</th>
+                <th>Вклад в удой</th>
+                <th>Вклад в жирность</th>
+                <th>Ключевая роль</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td>Румистар 600</td><td>+0,2–0,4 кг</td><td>+0,02–0,04 п.п.</td><td>Энергия из крахмала</td></tr>
+            <tr><td>ХолиТаргет</td><td>+0,5–0,8 кг</td><td>+0,05–0,08 п.п.</td><td>Защита печени, репродукция</td></tr>
+            <tr><td>ЛАСОРБ</td><td>+0,3–0,5 кг*</td><td>+0,02–0,03 п.п.*</td><td>Детоксикация</td></tr>
+            <tr><td>АКТИВ ИСТ+</td><td>+0,2–0,4 кг</td><td>+0,02–0,04 п.п.</td><td>Стабилизация рубца</td></tr>
+            <tr><td><strong>Суммарный вклад</strong></td><td><strong>+1,2–2,1 кг</strong></td><td><strong>+0,10–0,19 п.п.</strong></td><td><strong>Метаболическая поддержка</strong></td></tr>
+        </tbody>
+    </table>
+    <p style="font-size: 8pt; color: var(--text-light);"><small>*Эффект проявляется при наличии риска микотоксикоза</small></p>
+
+    <!-- 7. ПРОГНОЗИРУЕМЫЙ ПРИРОСТ УДОЯ -->
+    <h2>🥛 7️⃣ Прогнозируемый прирост удоя молока</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Сценарий</th>
+                <th>Прирост удоя</th>
+                <th>Новый удой</th>
+                <th>Механизм формирования</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Консервативный</td>
+                <td>+1,5 л/ гол./ день</td>
+                <td>34,5 л</td>
+                <td>Базовый эффект от bypass fat + холин + ферменты</td>
+            </tr>
+            <tr>
+                <td>Оптимистичный</td>
+                <td>+2,0 л/ гол./ день</td>
+                <td>35,0 л</td>
+                <td>Синергия всех компонентов + высокий генетический потенциал</td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="highlight-box">
+        ✅ <strong>Реалистичный прогноз: +2,0 – 2,5 л молока/ гол./ день</strong>
+    </div>
+
+    <!-- 8. ПРОГНОЗИРУЕМЫЙ ПРИРОСТ ЖИРНОСТИ -->
+    <h2>🧈 8️⃣ Прогнозируемый прирост жирности молока</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Показатель</th>
+                <th>Значение</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td>Базовая жирность</td><td>3,70%</td></tr>
+            <tr><td>Ожидаемый прирост</td><td>+0,15 – 0,20 п.п.</td></tr>
+            <tr><td>Новая жирность</td><td>3,90 – 3,95%</td></tr>
+            <tr><td>Надбавка за жир (при 3,85%)</td><td>+0,075 BYN/л</td></tr>
+            <tr><td>Надбавка за жир (при 3,95%)</td><td>+0,105 BYN/л</td></tr>
+        </tbody>
+    </table>
+    <div class="highlight-box">
+        ✅ <strong>Реалистичный прогноз: +0,15 – 0,20 п.п. к жирности</strong>
+    </div>
+</div>
+
+<!-- PAGE 3 -->
+<div class="page">
+    <!-- 9. ИСХОДНЫЕ ДАННЫЕ И ПРОГНОЗ -->
+    <h2>📋 9️⃣ Исходные данные и Прогноз</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Параметр</th>
+                <th>Значение</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td>Поголовье</td><td id="textHerd">200 голов (голштинская порода, 0–65 дней лактации)</td></tr>
+            <tr><td>Базовый удой</td><td id="textBaseYield">33 л/ гол./ день</td></tr>
+            <tr><td>Базовая жирность</td><td id="textBaseFat">3,70% (норма для расчёта цены — 3,6%)</td></tr>
+            <tr><td>Цена молока</td><td id="textMilkPrice">1,30 BYN/л (при 3,6% жира)</td></tr>
+            <tr><td>Надбавка за жир</td><td id="textFatBonus">+0,03 BYN/л за каждые +0,1% сверх 3,6%</td></tr>
+            <tr><td>Норма ввода концентрата</td><td id="textDosage">1,2 кг/ гол./ день</td></tr>
+            <tr><td>Цена концентрата</td><td id="textConcentratePrice">4,95 BYN/кг</td></tr>
+            <tr><td>Период анализа</td><td id="textDays">65 дней</td></tr>
+        </tbody>
+    </table>
+
+    <div class="highlight-box">
+        ✅ <strong>Реалистичный прогноз:</strong> +2,0 – 2,5 л молока/ гол./ день и +0,15 – 0,20 п.п. к жирности.
+    </div>
+
+    <!-- 10. КАЛЬКУЛЯТОР ЭКОНОМИКИ -->
+    <div class="calculator-section">
+        <h2>🧮 10️⃣ Калькулятор экономики</h2>
+        <p style="font-size: 9pt; color: var(--text-light); margin: 0 0 15px 0;">Изменяйте параметры ниже. Все расчеты в документе адаптируются под новые значения.</p>
+        
+        <div class="input-grid">
+            <div class="input-group">
+                <label>Поголовье (голов)</label>
+                <input type="number" id="herdSize" value="200" step="1" oninput="calculate()">
+            </div>
+            <div class="input-group">
+                <label>Длительность курса (дней)</label>
+                <input type="number" id="days" value="65" step="1" oninput="calculate()">
+            </div>
+            <div class="input-group">
+                <label>Норма ввода (кг/гол/день)</label>
+                <input type="number" id="dosage" value="1.2" step="0.1" oninput="calculate()">
+            </div>
+            <div class="input-group">
+                <label>Цена концентрата (BYN/кг)</label>
+                <input type="number" id="priceConcentrate" value="4.95" step="0.01" oninput="calculate()">
+            </div>
+            <div class="input-group">
+                <label>Базовый удой (л/гол/день)</label>
+                <input type="number" id="baseYield" value="33.0" step="0.1" oninput="calculate()">
+            </div>
+            <div class="input-group">
+                <label>Прогноз прироста удоя (л)</label>
+                <input type="number" id="yieldIncrease" value="2.0" step="0.1" oninput="calculate()">
+            </div>
+            <div class="input-group">
+                <label>Базовая жирность (%)</label>
+                <input type="number" id="baseFat" value="3.70" step="0.01" oninput="calculate()">
+            </div>
+            <div class="input-group">
+                <label>Прогноз прироста жирности (п.п.)</label>
+                <input type="number" id="fatIncrease" value="0.20" step="0.01" oninput="calculate()">
+            </div>
+            <div class="input-group">
+                <label>Цена молока (при 3.6% жира)</label>
+                <input type="number" id="milkPriceBase" value="1.30" step="0.01" oninput="calculate()">
+            </div>
+            <div class="input-group">
+                <label>Надбавка за жир (за 0.1%)</label>
+                <input type="number" id="fatBonusRate" value="0.03" step="0.01" oninput="calculate()">
+            </div>
+        </div>
+
+        <div class="results-grid">
+            <div class="result-card">
+                <span>Затраты на концентрат</span>
+                <span class="result-value" id="resCost">0 BYN</span>
+            </div>
+            <div class="result-card">
+                <span>Выручка: Объем молока</span>
+                <span class="result-value" id="resMilkVol">0 BYN</span>
+            </div>
+            <div class="result-card">
+                <span>Выручка: Надбавка за жир</span>
+                <span class="result-value" id="resFatBonus">0 BYN</span>
+            </div>
+            <div class="result-card highlight">
+                <span>Итого прямая выручка</span>
+                <span class="result-value" id="resDirectRevenue">0 BYN</span>
+            </div>
+            <div class="result-card">
+                <span>Косвенные эффекты (Здоровье)</span>
+                <span class="result-value" id="resIndirect">~68 000 BYN</span>
+            </div>
+            <div class="result-card profit">
+                <span>Чистый эффект (Прибыль)</span>
+                <span class="result-value" id="resNetProfit">0 BYN</span>
+            </div>
+            <div class="result-card">
+                <span>ROI (Окупаемость)</span>
+                <span class="result-value" id="resROI">0%</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- 11. КЛЮЧЕВЫЕ СООБЩЕНИЯ ДЛЯ КЛИЕНТА -->
+    <h2>🔑 11️⃣ Ключевые сообщения для клиента</h2>
+    <div class="key-messages">
+        <p style="margin: 0 0 10px 0;"><strong>📦 Продукт:</strong> ОмегаПро (Беларусь)</p>
+        <p style="margin: 0 0 10px 0;"><strong>🎯 Норма ввода:</strong> <span id="textDosage2">1,2</span> кг/ гол./ день</p>
+        <p style="margin: 0 0 10px 0;"><strong>📈 Результаты за <span id="textDays2">65</span> дней (секция <span id="textHerd2">200</span> голов):</strong></p>
+        <ul style="margin: 10px 0;">
+            <li>🥛 <strong>Прирост удоя:</strong> +1,5 – 2,0 л/ гол./ день</li>
+            <li>🧈 <strong>Прирост жирности:</strong> +0,15 – 0,25 п.п. (с 3,70% до 3,85–3,95%)</li>
+            <li>💎 <strong>Скрытые выгоды (репродукция + здоровье):</strong> +59 000 – 77 000 BYN</li>
+            <li>✅ <strong>Чистый экономический эффект:</strong> +32 000 – 73 000 BYN</li>
+            <li>📊 <strong>ROI:</strong> 138–185%</li>
+        </ul>
+        <p style="margin: 15px 0 0 0; padding: 12px; background: white; border-radius: var(--radius-sm); border-left: 3px solid var(--accent-color);"><strong>Главная ценность:</strong><br>
+        «Почти 60% прямой выручки формируется за счёт надбавки за жирность — качества, которое оплачивает переработчик. А долгосрочная окупаемость приходит через здоровье печени и раннюю репродукцию»</p>
+    </div>
+</div>
+
+<script>
+    function calculate() {
+        // Inputs
+        const herdSize = parseFloat(document.getElementById('herdSize').value) || 0;
+        const days = parseFloat(document.getElementById('days').value) || 0;
+        const dosage = parseFloat(document.getElementById('dosage').value) || 0;
+        const priceConcentrate = parseFloat(document.getElementById('priceConcentrate').value) || 0;
+        const baseYield = parseFloat(document.getElementById('baseYield').value) || 0;
+        const yieldIncrease = parseFloat(document.getElementById('yieldIncrease').value) || 0;
+        const baseFat = parseFloat(document.getElementById('baseFat').value) || 0;
+        const fatIncrease = parseFloat(document.getElementById('fatIncrease').value) || 0;
+        const milkPriceBase = parseFloat(document.getElementById('milkPriceBase').value) || 0;
+        const fatBonusRate = parseFloat(document.getElementById('fatBonusRate').value) || 0;
+
+        // Update Text Descriptions
+        document.getElementById('textHerd').innerText = `${herdSize} голов (голштинская порода, 0–${days} дней лактации)`;
+        document.getElementById('textDosage').innerText = `${dosage} кг/ гол./ день`;
+        document.getElementById('textDays').innerText = `${days} дней`;
+        document.getElementById('textBaseYield').innerText = `${baseYield} л/ гол./ день`;
+        document.getElementById('textBaseFat').innerText = `${baseFat}% (норма для расчёта цены — 3,6%)`;
+        document.getElementById('textMilkPrice').innerText = `${milkPriceBase} BYN/л (при 3,6% жира)`;
+        document.getElementById('textFatBonus').innerText = `+${fatBonusRate} BYN/л за каждые +0,1% сверх 3,6%`;
+        document.getElementById('textConcentratePrice').innerText = `${priceConcentrate} BYN/кг`;
+        
+        document.getElementById('textDosage2').innerText = dosage;
+        document.getElementById('textDays2').innerText = days;
+        document.getElementById('textHerd2').innerText = herdSize;
+
+        // Constants
+        const baseFatNorm = 3.6; // %
+
+        // Calculations
+        // 1. Cost
+        const totalCost = dosage * priceConcentrate * herdSize * days;
+
+        // 2. New Metrics
+        const newYield = baseYield + yieldIncrease;
+        const newFat = baseFat + fatIncrease;
+        const totalMilkVolume = newYield * herdSize * days;
+
+        // 3. Revenue Calculation
+        // Revenue from Volume Increase (using base price)
+        const revenueFromVolume = yieldIncrease * milkPriceBase * herdSize * days;
+
+        // Revenue from Fat Bonus
+        let fatBonusPerLiter = 0;
+        if (newFat > baseFatNorm) {
+            const fatPointsOver = (newFat - baseFatNorm) / 0.1;
+            fatBonusPerLiter = fatPointsOver * fatBonusRate;
+        }
+        
+        const revenueFromFat = fatBonusPerLiter * totalMilkVolume;
+
+        const totalDirectRevenue = revenueFromVolume + revenueFromFat;
+
+        // 4. Indirect Effects (Scaled by herd size relative to base 200)
+        const baseIndirect = 68000;
+        const scale = herdSize / 200;
+        const indirectRevenue = baseIndirect * scale;
+
+        // 5. Net Profit & ROI
+        const totalIncome = totalDirectRevenue + indirectRevenue;
+        const netProfit = totalIncome - totalCost;
+        let roi = 0;
+        if (totalCost > 0) {
+            roi = (netProfit / totalCost) * 100;
+        }
+
+        // Update UI
+        document.getElementById('resCost').innerText = totalCost.toLocaleString('ru-RU', {style: 'currency', currency: 'BYN'});
+        document.getElementById('resMilkVol').innerText = revenueFromVolume.toLocaleString('ru-RU', {style: 'currency', currency: 'BYN'});
+        document.getElementById('resFatBonus').innerText = revenueFromFat.toLocaleString('ru-RU', {style: 'currency', currency: 'BYN'});
+        document.getElementById('resDirectRevenue').innerText = totalDirectRevenue.toLocaleString('ru-RU', {style: 'currency', currency: 'BYN'});
+        document.getElementById('resIndirect').innerText = "~" + indirectRevenue.toLocaleString('ru-RU') + " BYN";
+        
+        const netProfitEl = document.getElementById('resNetProfit');
+        netProfitEl.innerText = netProfit.toLocaleString('ru-RU', {style: 'currency', currency: 'BYN'});
+        
+        if(netProfit > 0) {
+            netProfitEl.style.color = "#2c7a4b";
+        } else {
+            netProfitEl.style.color = "#d9534f";
+        }
+
+        document.getElementById('resROI').innerText = roi.toFixed(0) + "%";
+    }
+
+    window.onload = calculate;
+</script>
+
+</body>
+</html>
