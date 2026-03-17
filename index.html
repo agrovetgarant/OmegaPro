@@ -8,14 +8,17 @@
         :root {
             --primary-color: #2c7a4b;
             --primary-light: #e8f5e9;
+            --primary-dark: #1e5c39;
             --accent-color: #2196f3;
             --accent-light: #e3f2fd;
+            --secondary-color: #4caf50;
             --danger-color: #d9534f;
             --text-color: #333;
             --text-light: #666;
             --border-color: #e0e0e0;
             --shadow-sm: 0 2px 4px rgba(0,0,0,0.08);
             --shadow-md: 0 4px 8px rgba(0,0,0,0.12);
+            --shadow-lg: 0 8px 16px rgba(0,0,0,0.15);
             --radius-sm: 6px;
             --radius-md: 10px;
             --radius-lg: 14px;
@@ -23,7 +26,7 @@
 
         body {
             font-family: 'Segoe UI', 'Roboto', 'Helvetica Neue', sans-serif;
-            line-height: 1.4;
+            line-height: 1.45;
             color: var(--text-color);
             margin: 0;
             padding: 20px;
@@ -39,96 +42,281 @@
             margin: 0 auto 20px auto;
             background: white;
             border-radius: var(--radius-md);
-            box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+            box-shadow: var(--shadow-lg);
             box-sizing: border-box;
             position: relative;
         }
 
         /* Typography */
         h1 {
-            font-size: 17pt;
+            font-size: 18pt;
             text-align: center;
             color: var(--primary-color);
-            margin: 0 0 12px 0;
-            padding-bottom: 8px;
-            border-bottom: 2px solid var(--primary-color);
+            margin: 0 0 15px 0;
+            padding-bottom: 10px;
+            border-bottom: 3px solid var(--primary-color);
             font-weight: 700;
         }
 
         h2 {
-            font-size: 12pt;
+            font-size: 13pt;
             color: var(--primary-color);
-            margin: 14px 0 8px 0;
-            padding-bottom: 5px;
-            border-bottom: 1px solid var(--border-color);
+            margin: 16px 0 10px 0;
+            padding-bottom: 6px;
+            border-bottom: 2px solid var(--border-color);
             font-weight: 600;
         }
 
         h3 {
-            font-size: 10pt;
+            font-size: 11pt;
             color: var(--text-color);
-            margin: 10px 0 5px 0;
+            margin: 10px 0 6px 0;
             font-weight: 600;
         }
 
         p {
-            font-size: 9.5pt;
-            margin: 5px 0;
+            font-size: 10pt;
+            margin: 6px 0;
         }
 
-        /* Product Description */
+        /* Product Description - ENHANCED */
         .product-description {
             background: linear-gradient(135deg, var(--primary-light) 0%, #ffffff 100%);
-            border: 1px solid var(--primary-color);
-            padding: 12px 15px;
-            margin: 10px 0 14px 0;
-            font-size: 9.5pt;
-            border-radius: var(--radius-md);
-            box-shadow: var(--shadow-sm);
+            border: 2px solid var(--primary-color);
+            padding: 18px 22px;
+            margin: 12px 0 20px 0;
+            font-size: 10pt;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-md);
         }
 
         .product-description h3 {
             color: var(--primary-color);
-            margin: 0 0 8px 0;
-            border-bottom: 1px solid var(--border-color);
-            padding-bottom: 5px;
-            font-size: 11pt;
+            margin: 0 0 12px 0;
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 8px;
+            font-size: 13pt;
+            font-weight: 700;
+        }
+
+        .product-description .intro-text {
+            font-size: 10.5pt;
+            line-height: 1.6;
+            margin-bottom: 15px;
+            padding: 10px;
+            background: white;
+            border-radius: var(--radius-sm);
+            border-left: 4px solid var(--primary-color);
         }
 
         .product-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 10px;
-            margin-top: 8px;
+            gap: 12px;
+            margin-top: 12px;
         }
 
         .product-feature {
             background: white;
-            padding: 8px 10px;
-            border-radius: var(--radius-sm);
-            border-left: 3px solid var(--primary-color);
+            padding: 12px 15px;
+            border-radius: var(--radius-md);
+            border-left: 4px solid var(--primary-color);
+            box-shadow: var(--shadow-sm);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .product-feature:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
         }
 
         .product-feature strong {
             color: var(--primary-color);
             display: block;
+            margin-bottom: 5px;
+            font-size: 10pt;
+            font-weight: 700;
+        }
+
+        /* Composition Section - ENHANCED with Diagram */
+        .composition-section {
+            background: white;
+            border: 2px solid var(--primary-color);
+            padding: 18px 22px;
+            margin: 16px 0 20px 0;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-md);
+        }
+
+        .composition-section h2 {
+            margin: 0 0 15px 0;
+            font-size: 13pt;
+            border: none;
+            padding: 0;
+            color: var(--primary-color);
+        }
+
+        /* Pie Chart Diagram */
+        .composition-diagram {
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            margin: 20px 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #f5f5f5 0%, #ffffff 100%);
+            border-radius: var(--radius-md);
+            flex-wrap: wrap;
+        }
+
+        .pie-chart-container {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            margin: 10px;
+        }
+
+        .pie-chart {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: conic-gradient(
+                var(--primary-color) 0% 80%,
+                var(--accent-color) 80% 100%
+            );
+            box-shadow: var(--shadow-md);
+            position: relative;
+        }
+
+        .pie-chart::after {
+            content: "Состав";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 11pt;
+            color: var(--primary-color);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .composition-legend {
+            flex: 1;
+            min-width: 250px;
+            margin: 10px;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            margin: 12px 0;
+            padding: 10px;
+            background: white;
+            border-radius: var(--radius-sm);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .legend-color {
+            width: 30px;
+            height: 30px;
+            border-radius: 6px;
+            margin-right: 12px;
+            flex-shrink: 0;
+        }
+
+        .legend-color.base {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+        }
+
+        .legend-color.functional {
+            background: linear-gradient(135deg, var(--accent-color) 0%, #1976d2 100%);
+        }
+
+        .legend-text {
+            flex: 1;
+        }
+
+        .legend-text strong {
+            display: block;
+            font-size: 10pt;
+            color: var(--text-color);
             margin-bottom: 3px;
+        }
+
+        .legend-text span {
             font-size: 9pt;
+            color: var(--text-light);
+        }
+
+        .legend-percentage {
+            font-size: 16pt;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-left: 10px;
+        }
+
+        /* Composition Details */
+        .composition-details {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .composition-block {
+            background: white;
+            padding: 15px;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .composition-block.base {
+            border-left: 4px solid var(--primary-color);
+            background: linear-gradient(135deg, var(--primary-light) 0%, #ffffff 100%);
+        }
+
+        .composition-block.functional {
+            border-left: 4px solid var(--accent-color);
+            background: linear-gradient(135deg, var(--accent-light) 0%, #ffffff 100%);
+        }
+
+        .composition-block h4 {
+            margin: 0 0 10px 0;
+            font-size: 11pt;
+            color: var(--primary-color);
+            font-weight: 700;
+        }
+
+        .composition-block ul {
+            margin: 0;
+            padding-left: 18px;
+        }
+
+        .composition-block li {
+            margin: 5px 0;
+            font-size: 9.5pt;
         }
 
         /* Calculator */
         .calculator-section {
             background: linear-gradient(135deg, var(--primary-light) 0%, #ffffff 100%);
-            padding: 15px;
+            padding: 18px;
             border-radius: var(--radius-lg);
             border: 1px solid rgba(44, 122, 75, 0.15);
-            margin: 14px 0;
-            box-shadow: var(--shadow-sm);
+            margin: 18px 0;
+            box-shadow: var(--shadow-md);
         }
 
         .calculator-section h2 {
-            margin: 0 0 10px 0;
-            font-size: 12pt;
+            margin: 0 0 12px 0;
+            font-size: 13pt;
             border: none;
             padding: 0;
         }
@@ -136,8 +324,8 @@
         .input-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
-            margin-bottom: 10px;
+            gap: 12px;
+            margin-bottom: 12px;
         }
 
         .input-group {
@@ -146,18 +334,18 @@
         }
 
         .input-group label {
-            font-size: 8pt;
+            font-size: 8.5pt;
             font-weight: 600;
             color: var(--text-light);
-            margin-bottom: 3px;
+            margin-bottom: 4px;
             text-transform: uppercase;
         }
 
         .input-group input {
-            padding: 6px 8px;
-            border: 1px solid var(--border-color);
+            padding: 8px 10px;
+            border: 2px solid var(--border-color);
             border-radius: var(--radius-sm);
-            font-size: 9pt;
+            font-size: 9.5pt;
             width: 100%;
             box-sizing: border-box;
         }
@@ -170,16 +358,16 @@
         .results-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 8px;
-            margin-top: 10px;
+            gap: 10px;
+            margin-top: 12px;
         }
 
         .result-card {
             background: white;
-            padding: 8px 6px;
+            padding: 10px 8px;
             border-radius: var(--radius-md);
             text-align: center;
-            font-size: 8pt;
+            font-size: 8.5pt;
             box-shadow: var(--shadow-sm);
             border: 1px solid var(--border-color);
         }
@@ -198,8 +386,8 @@
             font-weight: 700;
             color: var(--primary-color);
             display: block;
-            font-size: 10pt;
-            margin-top: 3px;
+            font-size: 11pt;
+            margin-top: 4px;
         }
 
         .result-card.profit .result-value {
@@ -210,8 +398,8 @@
         table {
             width: 100%;
             border-collapse: collapse;
-            margin: 8px 0;
-            font-size: 8.5pt;
+            margin: 10px 0;
+            font-size: 9pt;
             border-radius: var(--radius-sm);
             overflow: hidden;
             box-shadow: var(--shadow-sm);
@@ -219,7 +407,7 @@
 
         th, td {
             border: 1px solid var(--border-color);
-            padding: 5px 8px;
+            padding: 6px 10px;
             text-align: left;
         }
 
@@ -228,7 +416,7 @@
             color: white;
             font-weight: 600;
             text-transform: uppercase;
-            font-size: 7.5pt;
+            font-size: 8pt;
         }
 
         tr:nth-child(even) {
@@ -243,12 +431,12 @@
         ul {
             list-style: none;
             padding-left: 0;
-            margin: 5px 0;
-            font-size: 9.5pt;
+            margin: 6px 0;
+            font-size: 10pt;
         }
 
         ul li {
-            padding: 3px 0 3px 18px;
+            padding: 4px 0 4px 20px;
             position: relative;
         }
 
@@ -261,7 +449,7 @@
         }
 
         ul ul {
-            margin: 3px 0 3px 20px;
+            margin: 4px 0 4px 20px;
         }
 
         ul ul li:before {
@@ -271,10 +459,10 @@
 
         .highlight-box {
             background: linear-gradient(135deg, var(--primary-light) 0%, #ffffff 100%);
-            border-left: 4px solid var(--primary-color);
-            padding: 8px 12px;
-            margin: 10px 0;
-            font-size: 9.5pt;
+            border-left: 5px solid var(--primary-color);
+            padding: 10px 14px;
+            margin: 12px 0;
+            font-size: 10pt;
             border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
             box-shadow: var(--shadow-sm);
         }
@@ -282,29 +470,29 @@
         .component-block {
             background: white;
             border: 1px solid var(--border-color);
-            padding: 10px;
-            margin-bottom: 8px;
+            padding: 12px;
+            margin-bottom: 10px;
             border-radius: var(--radius-md);
             box-shadow: var(--shadow-sm);
         }
 
         .component-title {
             font-weight: 700;
-            font-size: 10pt;
+            font-size: 11pt;
             color: var(--primary-color);
-            margin-bottom: 5px;
+            margin-bottom: 6px;
             display: block;
-            padding-bottom: 4px;
+            padding-bottom: 5px;
             border-bottom: 1px dashed var(--border-color);
         }
 
         /* Key Messages */
         .key-messages {
             background: linear-gradient(135deg, var(--accent-light) 0%, #ffffff 100%);
-            border-left: 4px solid var(--accent-color);
-            padding: 12px 15px;
-            margin: 14px 0;
-            font-size: 9.5pt;
+            border-left: 5px solid var(--accent-color);
+            padding: 15px 18px;
+            margin: 18px 0;
+            font-size: 10pt;
             border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
             box-shadow: var(--shadow-sm);
         }
@@ -321,13 +509,13 @@
                 box-shadow: none;
                 border-radius: 0;
                 width: 100%;
-                padding: 10mm 12mm;
+                padding: 12mm 14mm;
                 page-break-after: always;
             }
             .page:last-child {
                 page-break-after: auto;
             }
-            .calculator-section, .product-description, .highlight-box, .key-messages {
+            .calculator-section, .product-description, .composition-section, .highlight-box, .key-messages {
                 -webkit-print-color-adjust: exact;
                 print-color-adjust: exact;
             }
@@ -347,7 +535,7 @@
                 -webkit-print-color-adjust: exact;
                 print-color-adjust: exact;
             }
-            table, .component-block, .calculator-section, .highlight-box, .key-messages, .product-description {
+            table, .component-block, .calculator-section, .highlight-box, .key-messages, .product-description, .composition-section {
                 page-break-inside: avoid;
             }
             h2, h3 {
@@ -357,9 +545,10 @@
 
         @media (max-width: 850px) {
             body { padding: 10px; }
-            .page { width: 100%; padding: 10mm; }
-            .input-grid, .product-grid { grid-template-columns: repeat(1, 1fr); }
+            .page { width: 100%; padding: 12mm; }
+            .input-grid, .product-grid, .composition-details { grid-template-columns: repeat(1, 1fr); }
             .results-grid { grid-template-columns: repeat(2, 1fr); }
+            .composition-diagram { flex-direction: column; }
         }
     </style>
 </head>
@@ -371,10 +560,12 @@
 
     <div class="content-section">
         
-        <!-- 1. О ПРОДУКТЕ -->
+        <!-- 1. О ПРОДУКТЕ - ENHANCED -->
         <div class="product-description">
             <h3>📦 О продукте «ОмегаПро»</h3>
-            <p style="margin: 6px 0;"><strong>ОмегаПро</strong> — это специализированный концентрат для высокопродуктивных коров в период 0–65 дней лактации. Продукт разработан для поддержки животных в период отрицательного баланса энергии и максимального раскрытия генетического потенциала.</p>
+            <div class="intro-text">
+                <strong>ОмегаПро</strong> — это специализированный концентрат для высокопродуктивных коров в период 0–65 дней лактации. Продукт разработан для поддержки животных в период отрицательного баланса энергии и максимального раскрытия генетического потенциала.
+            </div>
             
             <div class="product-grid">
                 <div class="product-feature">
@@ -396,39 +587,69 @@
             </div>
         </div>
 
-        <!-- 2. СОСТАВ КОНЦЕНТРАТА -->
-        <h2>🧬 2️⃣ Состав концентрата (детализация)</h2>
-        <div class="component-block">
-            <span class="component-title">📦 1 кг концентрата «ОмегаПро»</span>
-            <ul>
-                <li><strong>🔹 БАЗОВАЯ МАТРИЦА (80% = 800 г)</strong>
+        <!-- 2. СОСТАВ КОНЦЕНТРАТА - ENHANCED WITH DIAGRAM -->
+        <div class="composition-section">
+            <h2>🧬 2️⃣ Состав концентрата (детализация)</h2>
+            
+            <!-- Visual Diagram -->
+            <div class="composition-diagram">
+                <div class="pie-chart-container">
+                    <div class="pie-chart"></div>
+                </div>
+                <div class="composition-legend">
+                    <div class="legend-item">
+                        <div class="legend-color base"></div>
+                        <div class="legend-text">
+                            <strong>Базовая матрица</strong>
+                            <span>Соя + Лён</span>
+                        </div>
+                        <div class="legend-percentage">80%</div>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color functional"></div>
+                        <div class="legend-text">
+                            <strong>Функциональный комплекс</strong>
+                            <span>Амилаза + Холин + Адсорбент + Дрожжи</span>
+                        </div>
+                        <div class="legend-percentage">20%</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Detailed Composition -->
+            <div class="composition-details">
+                <div class="composition-block base">
+                    <h4>🔹 БАЗОВАЯ МАТРИЦА (80% = 800 г)</h4>
                     <ul>
-                        <li>Соя микронизированная: 20% от базы = 160 г/кг продукта</li>
-                        <li>Лён двойной обработки*: 80% от базы = 640 г/кг продукта</li>
+                        <li><strong>Соя микронизированная:</strong> 20% от базы = 160 г/кг продукта</li>
+                        <li><strong>Лён двойной обработки*:</strong> 80% от базы = 640 г/кг продукта</li>
                     </ul>
-                </li>
-                <li><strong>🔹 ФУНКЦИОНАЛЬНЫЙ КОМПЛЕКС (20% = 200 г)</strong>
+                </div>
+                <div class="composition-block functional">
+                    <h4>🔹 ФУНКЦИОНАЛЬНЫЙ КОМПЛЕКС (20% = 200 г)</h4>
                     <ul>
-                        <li>Румистар 600 (α-амилаза): ~10–15 г</li>
-                        <li>ХолиТаргет (защищённый холин 30%): ~25–30 г → 9 г чистого холина</li>
-                        <li>ЛАСОРБ (адсорбент микотоксинов): ~4–5 г</li>
-                        <li>АКТИВ ИСТ+ (живые дрожжи): ~70–75 г</li>
+                        <li><strong>Румистар 600:</strong> ~10–15 г</li>
+                        <li><strong>ХолиТаргет 30%:</strong> ~25–30 г → 9 г чистого холина</li>
+                        <li><strong>ЛАСОРБ:</strong> ~4–5 г</li>
+                        <li><strong>АКТИВ ИСТ+:</strong> ~70–75 г</li>
                     </ul>
-                </li>
-            </ul>
-            <p style="font-size: 8.5pt; color: var(--text-light); margin-top: 8px;"><em>* Микронизация + последующая экструзия для защиты Омега-3</em></p>
+                </div>
+            </div>
+            <p style="font-size: 9pt; color: var(--text-light); margin-top: 12px; font-style: italic;">
+                * Микронизация + последующая экструзия для защиты Омега-3
+            </p>
         </div>
     </div>
 </div>
 
-<!-- PAGE 2 - СОЯ + ЛЁН НА ОДНОЙ СТРАНИЦЕ -->
+<!-- PAGE 2 -->
 <div class="page">
     <div class="content-section">
         <!-- 3. ДЕЙСТВИЕ КОМПОНЕНТОВ ИЗ СОИ -->
         <h2>🌱 3️⃣ Действие компонентов из сои</h2>
         <div class="component-block">
             <span class="component-title">Микронизированная мука (160 г/кг продукта)</span>
-            <p style="margin: 6px 0;"><strong>🔬 Технология микронизации:</strong><br>
+            <p style="margin: 8px 0;"><strong>🔬 Технология микронизации:</strong><br>
             Инфракрасный нагрев (120–140°С) → вибрация молекул воды внутри зерна → микровзрывы клеточных стенок → повышение доступности нутриентов.</p>
             
             <table>
@@ -462,7 +683,7 @@
                     </tr>
                 </tbody>
             </table>
-            <p style="margin: 8px 0 0 0;"><strong>📊 Вклад в продуктивность (при вводе 1,2 кг/день):</strong></p>
+            <p style="margin: 10px 0 0 0;"><strong>📊 Вклад в продуктивность (при вводе 1,2 кг/день):</strong></p>
             <ul>
                 <li>Транзитный протеин: +25–30 г/ гол./ день → поддержка синтеза молока</li>
                 <li>Энергия: +0,3–0,5 МДж/ гол./ день → снижение мобилизации жировых запасов</li>
@@ -474,7 +695,7 @@
         <h2>🌿 4️⃣ Действие компонентов из льна</h2>
         <div class="component-block">
             <span class="component-title">Двойная обработка: микронизация + экструзия (640 г/кг продукта)</span>
-            <p style="margin: 6px 0;"><strong>🔬 Технология Double Processing:</strong><br>
+            <p style="margin: 8px 0;"><strong>🔬 Технология Double Processing:</strong><br>
             Этап 1: Микронизация → разрушение клеточных стенок, инактивация линамаразы.<br>
             Этап 2: Экструзия → формирование липидно-белковой матрицы, «капсулирование» жиров.<br>
             Результат: защита Омега-3 от биогидрогенизации в рубце на 60–70%.</p>
@@ -515,7 +736,7 @@
                     </tr>
                 </tbody>
             </table>
-            <p style="margin: 8px 0 0 0;"><strong>📊 Вклад в продуктивность (при вводе 1,2 кг/день):</strong></p>
+            <p style="margin: 10px 0 0 0;"><strong>📊 Вклад в продуктивность (при вводе 1,2 кг/день):</strong></p>
             <ul>
                 <li><strong>Bypass Fat:</strong> +190–215 г/гол./день → энергетическая поддержка пика лактации</li>
                 <li><strong>Омега-3 (АЛК):</strong> +145–170 г/гол./день → репродукция + противовоспалительный эффект</li>
@@ -530,7 +751,7 @@
 <div class="page">
     <!-- 5. ДЕЙСТВИЕ КОМПОНЕНТОВ ФУНКЦИОНАЛЬНОГО КОМПЛЕКСА -->
     <h2>⚗️ 5️⃣ Действие компонентов функционального комплекса</h2>
-    <p style="font-size: 9.5pt; font-style: italic; color: var(--text-light);">Не «витаминный микс», а целевая матрица метаболической поддержки (20% состава)</p>
+    <p style="font-size: 10pt; font-style: italic; color: var(--text-light);">Не «витаминный микс», а целевая матрица метаболической поддержки (20% состава)</p>
 
     <div class="component-block">
         <span class="component-title">🔹 Румистар 600 (α-амилаза)</span>
@@ -671,7 +892,7 @@
     <!-- 10. КАЛЬКУЛЯТОР -->
     <div class="calculator-section">
         <h2>🧮 10️⃣ Калькулятор экономики</h2>
-        <p style="font-size: 8.5pt; color: var(--text-light); margin: 0 0 10px 0;">Изменяйте параметры ниже. Все расчеты в документе адаптируются под новые значения.</p>
+        <p style="font-size: 9pt; color: var(--text-light); margin: 0 0 12px 0;">Изменяйте параметры ниже. Все расчеты в документе адаптируются под новые значения.</p>
         
         <div class="input-grid">
             <div class="input-group">
@@ -751,17 +972,17 @@
     <!-- 11. КЛЮЧЕВЫЕ СООБЩЕНИЯ -->
     <h2>🔑 11️⃣ Ключевые сообщения для клиента</h2>
     <div class="key-messages">
-        <p style="margin: 0 0 8px 0;"><strong>📦 Продукт:</strong> ОмегаПро (Беларусь)</p>
-        <p style="margin: 0 0 8px 0;"><strong>🎯 Норма ввода:</strong> <span id="textDosage2">1,2</span> кг/ гол./ день</p>
-        <p style="margin: 0 0 8px 0;"><strong>📈 Результаты за <span id="textDays2">65</span> дней (секция <span id="textHerd2">200</span> голов):</strong></p>
-        <ul style="margin: 8px 0;">
+        <p style="margin: 0 0 10px 0;"><strong>📦 Продукт:</strong> ОмегаПро (Беларусь)</p>
+        <p style="margin: 0 0 10px 0;"><strong>🎯 Норма ввода:</strong> <span id="textDosage2">1,2</span> кг/ гол./ день</p>
+        <p style="margin: 0 0 10px 0;"><strong>📈 Результаты за <span id="textDays2">65</span> дней (секция <span id="textHerd2">200</span> голов):</strong></p>
+        <ul style="margin: 10px 0;">
             <li>🥛 <strong>Прирост удоя:</strong> +1,5 – 2,0 л/ гол./ день</li>
             <li>🧈 <strong>Прирост жирности:</strong> +0,15 – 0,25 п.п. (с 3,70% до 3,85–3,95%)</li>
             <li>💎 <strong>Скрытые выгоды (репродукция + здоровье):</strong> +59 000 – 77 000 BYN</li>
             <li>✅ <strong>Чистый экономический эффект:</strong> +32 000 – 73 000 BYN</li>
             <li>📊 <strong>ROI:</strong> 138–185%</li>
         </ul>
-        <p style="margin: 12px 0 0 0; padding: 10px; background: white; border-radius: var(--radius-sm); border-left: 3px solid var(--accent-color);"><strong>Главная ценность:</strong><br>
+        <p style="margin: 15px 0 0 0; padding: 12px; background: white; border-radius: var(--radius-sm); border-left: 3px solid var(--accent-color);"><strong>Главная ценность:</strong><br>
         «Почти 60% прямой выручки формируется за счёт надбавки за жирность — качества, которое оплачивает переработчик. А долгосрочная окупаемость приходит через здоровье печени и раннюю репродукцию»</p>
     </div>
 </div>
