@@ -10,14 +10,12 @@
             --primary-light: #e8f5e9;
             --accent-color: #2196f3;
             --accent-light: #e3f2fd;
-            --warning-color: #ff9800;
             --danger-color: #d9534f;
             --text-color: #333;
             --text-light: #666;
             --border-color: #e0e0e0;
             --shadow-sm: 0 2px 4px rgba(0,0,0,0.08);
             --shadow-md: 0 4px 8px rgba(0,0,0,0.12);
-            --shadow-lg: 0 8px 16px rgba(0,0,0,0.15);
             --radius-sm: 6px;
             --radius-md: 10px;
             --radius-lg: 14px;
@@ -25,10 +23,10 @@
 
         body {
             font-family: 'Segoe UI', 'Roboto', 'Helvetica Neue', sans-serif;
-            line-height: 1.5;
+            line-height: 1.4;
             color: var(--text-color);
             margin: 0;
-            padding: 30px;
+            padding: 20px;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
         }
@@ -37,56 +35,100 @@
         .page {
             width: 210mm;
             min-height: 297mm;
-            padding: 20mm;
-            margin: 0 auto 30px auto;
+            padding: 14mm 16mm;
+            margin: 0 auto 20px auto;
             background: white;
             border-radius: var(--radius-md);
-            box-shadow: var(--shadow-lg);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.15);
             box-sizing: border-box;
             position: relative;
         }
 
         /* Typography */
         h1 {
-            font-size: 20pt;
+            font-size: 17pt;
             text-align: center;
             color: var(--primary-color);
-            margin: 0 0 25px 0;
-            padding-bottom: 15px;
-            border-bottom: 3px solid var(--primary-color);
+            margin: 0 0 12px 0;
+            padding-bottom: 8px;
+            border-bottom: 2px solid var(--primary-color);
             font-weight: 700;
-            letter-spacing: -0.5px;
         }
 
         h2 {
-            font-size: 14pt;
+            font-size: 12pt;
             color: var(--primary-color);
-            margin: 25px 0 12px 0;
-            padding-bottom: 6px;
-            border-bottom: 2px solid var(--border-color);
+            margin: 14px 0 8px 0;
+            padding-bottom: 5px;
+            border-bottom: 1px solid var(--border-color);
             font-weight: 600;
         }
 
         h3 {
-            font-size: 11pt;
+            font-size: 10pt;
             color: var(--text-color);
-            margin: 15px 0 8px 0;
+            margin: 10px 0 5px 0;
             font-weight: 600;
         }
 
-        /* Modern Calculator */
+        p {
+            font-size: 9.5pt;
+            margin: 5px 0;
+        }
+
+        /* Product Description */
+        .product-description {
+            background: linear-gradient(135deg, var(--primary-light) 0%, #ffffff 100%);
+            border: 1px solid var(--primary-color);
+            padding: 12px 15px;
+            margin: 10px 0 14px 0;
+            font-size: 9.5pt;
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .product-description h3 {
+            color: var(--primary-color);
+            margin: 0 0 8px 0;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 5px;
+            font-size: 11pt;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-top: 8px;
+        }
+
+        .product-feature {
+            background: white;
+            padding: 8px 10px;
+            border-radius: var(--radius-sm);
+            border-left: 3px solid var(--primary-color);
+        }
+
+        .product-feature strong {
+            color: var(--primary-color);
+            display: block;
+            margin-bottom: 3px;
+            font-size: 9pt;
+        }
+
+        /* Calculator */
         .calculator-section {
             background: linear-gradient(135deg, var(--primary-light) 0%, #ffffff 100%);
-            padding: 20px;
+            padding: 15px;
             border-radius: var(--radius-lg);
             border: 1px solid rgba(44, 122, 75, 0.15);
-            margin-bottom: 25px;
-            box-shadow: var(--shadow-md);
+            margin: 14px 0;
+            box-shadow: var(--shadow-sm);
         }
 
         .calculator-section h2 {
-            margin-top: 0;
-            font-size: 13pt;
+            margin: 0 0 10px 0;
+            font-size: 12pt;
             border: none;
             padding: 0;
         }
@@ -94,8 +136,8 @@
         .input-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 14px;
-            margin-bottom: 15px;
+            gap: 10px;
+            margin-bottom: 10px;
         }
 
         .input-group {
@@ -104,52 +146,42 @@
         }
 
         .input-group label {
-            font-size: 9pt;
+            font-size: 8pt;
             font-weight: 600;
             color: var(--text-light);
-            margin-bottom: 5px;
+            margin-bottom: 3px;
             text-transform: uppercase;
-            letter-spacing: 0.3px;
         }
 
         .input-group input {
-            padding: 10px 12px;
-            border: 2px solid var(--border-color);
+            padding: 6px 8px;
+            border: 1px solid var(--border-color);
             border-radius: var(--radius-sm);
-            font-size: 10pt;
+            font-size: 9pt;
             width: 100%;
             box-sizing: border-box;
-            transition: all 0.3s ease;
-            background: white;
         }
 
         .input-group input:focus {
             outline: none;
             border-color: var(--primary-color);
-            box-shadow: 0 0 0 3px rgba(44, 122, 75, 0.15);
         }
 
         .results-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 12px;
-            margin-top: 15px;
+            gap: 8px;
+            margin-top: 10px;
         }
 
         .result-card {
             background: white;
-            padding: 12px 10px;
+            padding: 8px 6px;
             border-radius: var(--radius-md);
             text-align: center;
-            font-size: 9pt;
+            font-size: 8pt;
             box-shadow: var(--shadow-sm);
             border: 1px solid var(--border-color);
-            transition: transform 0.2s ease;
-        }
-
-        .result-card:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-md);
         }
 
         .result-card.profit {
@@ -166,8 +198,8 @@
             font-weight: 700;
             color: var(--primary-color);
             display: block;
-            font-size: 12pt;
-            margin-top: 4px;
+            font-size: 10pt;
+            margin-top: 3px;
         }
 
         .result-card.profit .result-value {
@@ -178,8 +210,8 @@
         table {
             width: 100%;
             border-collapse: collapse;
-            margin: 12px 0;
-            font-size: 9pt;
+            margin: 8px 0;
+            font-size: 8.5pt;
             border-radius: var(--radius-sm);
             overflow: hidden;
             box-shadow: var(--shadow-sm);
@@ -187,7 +219,7 @@
 
         th, td {
             border: 1px solid var(--border-color);
-            padding: 8px 10px;
+            padding: 5px 8px;
             text-align: left;
         }
 
@@ -196,8 +228,7 @@
             color: white;
             font-weight: 600;
             text-transform: uppercase;
-            font-size: 8pt;
-            letter-spacing: 0.5px;
+            font-size: 7.5pt;
         }
 
         tr:nth-child(even) {
@@ -212,12 +243,12 @@
         ul {
             list-style: none;
             padding-left: 0;
-            margin: 8px 0;
-            font-size: 10pt;
+            margin: 5px 0;
+            font-size: 9.5pt;
         }
 
         ul li {
-            padding: 4px 0 4px 20px;
+            padding: 3px 0 3px 18px;
             position: relative;
         }
 
@@ -229,12 +260,21 @@
             left: 5px;
         }
 
+        ul ul {
+            margin: 3px 0 3px 20px;
+        }
+
+        ul ul li:before {
+            content: "◦";
+            color: var(--text-light);
+        }
+
         .highlight-box {
             background: linear-gradient(135deg, var(--primary-light) 0%, #ffffff 100%);
-            border-left: 5px solid var(--primary-color);
-            padding: 12px 15px;
-            margin: 15px 0;
-            font-size: 10pt;
+            border-left: 4px solid var(--primary-color);
+            padding: 8px 12px;
+            margin: 10px 0;
+            font-size: 9.5pt;
             border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
             box-shadow: var(--shadow-sm);
         }
@@ -242,77 +282,34 @@
         .component-block {
             background: white;
             border: 1px solid var(--border-color);
-            padding: 14px;
-            margin-bottom: 12px;
+            padding: 10px;
+            margin-bottom: 8px;
             border-radius: var(--radius-md);
             box-shadow: var(--shadow-sm);
-            transition: box-shadow 0.3s ease;
-        }
-
-        .component-block:hover {
-            box-shadow: var(--shadow-md);
         }
 
         .component-title {
             font-weight: 700;
-            font-size: 11pt;
+            font-size: 10pt;
             color: var(--primary-color);
-            margin-bottom: 8px;
+            margin-bottom: 5px;
             display: block;
-            padding-bottom: 6px;
+            padding-bottom: 4px;
             border-bottom: 1px dashed var(--border-color);
         }
 
-        /* Product Description Box */
-        .product-description {
-            background: linear-gradient(135deg, var(--primary-light) 0%, #ffffff 100%);
-            border: 2px solid var(--primary-color);
-            padding: 18px 20px;
-            margin: 20px 0;
-            font-size: 10pt;
-            border-radius: var(--radius-md);
-            box-shadow: var(--shadow-md);
-        }
-
-        .product-description h3 {
-            color: var(--primary-color);
-            margin-top: 0;
-            border-bottom: 1px solid var(--border-color);
-            padding-bottom: 8px;
-        }
-
-        .product-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
-            margin-top: 12px;
-        }
-
-        .product-feature {
-            background: white;
-            padding: 10px;
-            border-radius: var(--radius-sm);
-            border-left: 3px solid var(--primary-color);
-        }
-
-        .product-feature strong {
-            color: var(--primary-color);
-            display: block;
-            margin-bottom: 5px;
-        }
-
-        /* Key Messages Box */
+        /* Key Messages */
         .key-messages {
             background: linear-gradient(135deg, var(--accent-light) 0%, #ffffff 100%);
-            border-left: 5px solid var(--accent-color);
-            padding: 15px 18px;
-            margin: 20px 0;
-            font-size: 10pt;
+            border-left: 4px solid var(--accent-color);
+            padding: 12px 15px;
+            margin: 14px 0;
+            font-size: 9.5pt;
             border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
             box-shadow: var(--shadow-sm);
         }
 
-        /* Print Styles */
+        /* Print Optimization */
         @media print {
             body {
                 background: white;
@@ -324,18 +321,13 @@
                 box-shadow: none;
                 border-radius: 0;
                 width: 100%;
-                padding: 15mm;
+                padding: 10mm 12mm;
                 page-break-after: always;
             }
             .page:last-child {
                 page-break-after: auto;
             }
-            .calculator-section, .product-description {
-                background: #f5f5f5 !important;
-                -webkit-print-color-adjust: exact;
-                print-color-adjust: exact;
-            }
-            .highlight-box, .key-messages {
+            .calculator-section, .product-description, .highlight-box, .key-messages {
                 -webkit-print-color-adjust: exact;
                 print-color-adjust: exact;
             }
@@ -358,26 +350,16 @@
             table, .component-block, .calculator-section, .highlight-box, .key-messages, .product-description {
                 page-break-inside: avoid;
             }
-            .input-group input {
-                border: 1px solid #ccc;
+            h2, h3 {
+                page-break-after: avoid;
             }
         }
 
-        /* Responsive */
         @media (max-width: 850px) {
-            body {
-                padding: 10px;
-            }
-            .page {
-                width: 100%;
-                padding: 15mm;
-            }
-            .input-grid, .product-grid {
-                grid-template-columns: repeat(1, 1fr);
-            }
-            .results-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
+            body { padding: 10px; }
+            .page { width: 100%; padding: 10mm; }
+            .input-grid, .product-grid { grid-template-columns: repeat(1, 1fr); }
+            .results-grid { grid-template-columns: repeat(2, 1fr); }
         }
     </style>
 </head>
@@ -392,7 +374,7 @@
         <!-- 1. О ПРОДУКТЕ -->
         <div class="product-description">
             <h3>📦 О продукте «ОмегаПро»</h3>
-            <p style="margin: 10px 0;"><strong>ОмегаПро</strong> — это специализированный концентрат для высокопродуктивных коров в период 0–65 дней лактации. Продукт разработан для поддержки животных в период отрицательного баланса энергии и максимального раскрытия генетического потенциала.</p>
+            <p style="margin: 6px 0;"><strong>ОмегаПро</strong> — это специализированный концентрат для высокопродуктивных коров в период 0–65 дней лактации. Продукт разработан для поддержки животных в период отрицательного баланса энергии и максимального раскрытия генетического потенциала.</p>
             
             <div class="product-grid">
                 <div class="product-feature">
@@ -434,14 +416,19 @@
                     </ul>
                 </li>
             </ul>
-            <p style="font-size: 9pt; color: var(--text-light); margin-top: 10px;"><em>* Микронизация + последующая экструзия для защиты Омега-3</em></p>
+            <p style="font-size: 8.5pt; color: var(--text-light); margin-top: 8px;"><em>* Микронизация + последующая экструзия для защиты Омега-3</em></p>
         </div>
+    </div>
+</div>
 
+<!-- PAGE 2 - СОЯ + ЛЁН НА ОДНОЙ СТРАНИЦЕ -->
+<div class="page">
+    <div class="content-section">
         <!-- 3. ДЕЙСТВИЕ КОМПОНЕНТОВ ИЗ СОИ -->
         <h2>🌱 3️⃣ Действие компонентов из сои</h2>
         <div class="component-block">
             <span class="component-title">Микронизированная мука (160 г/кг продукта)</span>
-            <p style="font-size: 10pt; margin: 8px 0;"><strong>🔬 Технология микронизации:</strong><br>
+            <p style="margin: 6px 0;"><strong>🔬 Технология микронизации:</strong><br>
             Инфракрасный нагрев (120–140°С) → вибрация молекул воды внутри зерна → микровзрывы клеточных стенок → повышение доступности нутриентов.</p>
             
             <table>
@@ -475,75 +462,75 @@
                     </tr>
                 </tbody>
             </table>
-            <p style="font-size: 10pt; margin: 10px 0 0 0;"><strong>📊 Вклад в продуктивность (при вводе 1,2 кг/день):</strong></p>
+            <p style="margin: 8px 0 0 0;"><strong>📊 Вклад в продуктивность (при вводе 1,2 кг/день):</strong></p>
             <ul>
                 <li>Транзитный протеин: +25–30 г/ гол./ день → поддержка синтеза молока</li>
                 <li>Энергия: +0,3–0,5 МДж/ гол./ день → снижение мобилизации жировых запасов</li>
                 <li>Косвенный эффект на удой: + 0,2–0,4 кг/день</li>
             </ul>
         </div>
+
+        <!-- 4. ДЕЙСТВИЕ КОМПОНЕНТОВ ИЗ ЛЬНА -->
+        <h2>🌿 4️⃣ Действие компонентов из льна</h2>
+        <div class="component-block">
+            <span class="component-title">Двойная обработка: микронизация + экструзия (640 г/кг продукта)</span>
+            <p style="margin: 6px 0;"><strong>🔬 Технология Double Processing:</strong><br>
+            Этап 1: Микронизация → разрушение клеточных стенок, инактивация линамаразы.<br>
+            Этап 2: Экструзия → формирование липидно-белковой матрицы, «капсулирование» жиров.<br>
+            Результат: защита Омега-3 от биогидрогенизации в рубце на 60–70%.</p>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Эффект</th>
+                        <th>Механизм</th>
+                        <th>Практическая ценность</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>🛡️ Защита Омега-3 (АЛК)</td>
+                        <td>Липидная капсула → доставка в тонкий кишечник</td>
+                        <td>120–140 г АЛК/кг продукта → противовоспалительный эффект, улучшение качества ооцитов</td>
+                    </tr>
+                    <tr>
+                        <td>⚡ Bypass Fat (транзитный жир)</td>
+                        <td>Защищённые жирные кислоты → прямое включение в синтез молока</td>
+                        <td>160–180 г/кг продукта → концентрированная энергия без нагрузки на рубец</td>
+                    </tr>
+                    <tr>
+                        <td>🔄 Репродуктивная поддержка</td>
+                        <td>АЛК подавляет синтез PGF 2α → сохранение жёлтого тела</td>
+                        <td>Овуляция на +10–14 дней раньше → сокращение сервис-периода</td>
+                    </tr>
+                    <tr>
+                        <td>🛡️ Буферный эффект для рубца</td>
+                        <td>Слизистые полисахариды льна → обволакивающее действие</td>
+                        <td>Профилактика субклинического ацидоза при высококонцентратном кормлении</td>
+                    </tr>
+                    <tr>
+                        <td>🧈 Влияние на жирность молока</td>
+                        <td>Транзитные жирные кислоты (С18:1, С18:3) → субстрат для синтеза молочного жира</td>
+                        <td>+0,08–0,12 п.п. к жирности</td>
+                    </tr>
+                </tbody>
+            </table>
+            <p style="margin: 8px 0 0 0;"><strong>📊 Вклад в продуктивность (при вводе 1,2 кг/день):</strong></p>
+            <ul>
+                <li><strong>Bypass Fat:</strong> +190–215 г/гол./день → энергетическая поддержка пика лактации</li>
+                <li><strong>Омега-3 (АЛК):</strong> +145–170 г/гол./день → репродукция + противовоспалительный эффект</li>
+                <li><strong>Косвенный эффект на удой:</strong> +0,8–1,2 кг/день</li>
+                <li><strong>Эффект на жирность:</strong> +0,10–0,15 п.п.</li>
+            </ul>
+        </div>
     </div>
 </div>
 
-<!-- PAGE 2 -->
+<!-- PAGE 3 -->
 <div class="page">
-    <!-- 4. ДЕЙСТВИЕ КОМПОНЕНТОВ ИЗ ЛЬНА -->
-    <h2>🌿 4️⃣ Действие компонентов из льна</h2>
-    <div class="component-block">
-        <span class="component-title">Двойная обработка: микронизация + экструзия (640 г/кг продукта)</span>
-        <p style="font-size: 10pt; margin: 8px 0;"><strong>🔬 Технология Double Processing:</strong><br>
-        Этап 1: Микронизация → разрушение клеточных стенок, инактивация линамаразы.<br>
-        Этап 2: Экструзия → формирование липидно-белковой матрицы, «капсулирование» жиров.<br>
-        Результат: защита Омега-3 от биогидрогенизации в рубце на 60–70%.</p>
-
-        <table>
-            <thead>
-                <tr>
-                    <th>Эффект</th>
-                    <th>Механизм</th>
-                    <th>Практическая ценность</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>🛡️ Защита Омега-3 (АЛК)</td>
-                    <td>Липидная капсула → доставка в тонкий кишечник</td>
-                    <td>120–140 г АЛК/кг продукта → противовоспалительный эффект, улучшение качества ооцитов</td>
-                </tr>
-                <tr>
-                    <td>⚡ Bypass Fat (транзитный жир)</td>
-                    <td>Защищённые жирные кислоты → прямое включение в синтез молока</td>
-                    <td>160–180 г/кг продукта → концентрированная энергия без нагрузки на рубец</td>
-                </tr>
-                <tr>
-                    <td>🔄 Репродуктивная поддержка</td>
-                    <td>АЛК подавляет синтез PGF 2α → сохранение жёлтого тела</td>
-                    <td>Овуляция на +10–14 дней раньше → сокращение сервис-периода</td>
-                </tr>
-                <tr>
-                    <td>🛡️ Буферный эффект для рубца</td>
-                    <td>Слизистые полисахариды льна → обволакивающее действие</td>
-                    <td>Профилактика субклинического ацидоза при высококонцентратном кормлении</td>
-                </tr>
-                <tr>
-                    <td>🧈 Влияние на жирность молока</td>
-                    <td>Транзитные жирные кислоты (С18:1, С18:3) → субстрат для синтеза молочного жира</td>
-                    <td>+0,08–0,12 п.п. к жирности</td>
-                </tr>
-            </tbody>
-        </table>
-        <p style="font-size: 10pt; margin: 10px 0 0 0;"><strong>📊 Вклад в продуктивность (при вводе 1,2 кг/день):</strong></p>
-        <ul>
-            <li><strong>Bypass Fat:</strong> +190–215 г/гол./день → энергетическая поддержка пика лактации</li>
-            <li><strong>Омега-3 (АЛК):</strong> +145–170 г/гол./день → репродукция + противовоспалительный эффект</li>
-            <li><strong>Косвенный эффект на удой:</strong> +0,8–1,2 кг/день</li>
-            <li><strong>Эффект на жирность:</strong> +0,10–0,15 п.п.</li>
-        </ul>
-    </div>
-
     <!-- 5. ДЕЙСТВИЕ КОМПОНЕНТОВ ФУНКЦИОНАЛЬНОГО КОМПЛЕКСА -->
     <h2>⚗️ 5️⃣ Действие компонентов функционального комплекса</h2>
-    <p style="font-size: 10pt; font-style: italic; color: var(--text-light);">Не «витаминный микс», а целевая матрица метаболической поддержки (20% состава)</p>
+    <p style="font-size: 9.5pt; font-style: italic; color: var(--text-light);">Не «витаминный микс», а целевая матрица метаболической поддержки (20% состава)</p>
 
     <div class="component-block">
         <span class="component-title">🔹 Румистар 600 (α-амилаза)</span>
@@ -601,7 +588,10 @@
         </tbody>
     </table>
     <p style="font-size: 8pt; color: var(--text-light);"><small>*Эффект проявляется при наличии риска микотоксикоза</small></p>
+</div>
 
+<!-- PAGE 4 -->
+<div class="page">
     <!-- 7. ПРОГНОЗИРУЕМЫЙ ПРИРОСТ УДОЯ -->
     <h2>🥛 7️⃣ Прогнозируемый прирост удоя молока</h2>
     <table>
@@ -652,11 +642,8 @@
     <div class="highlight-box">
         ✅ <strong>Реалистичный прогноз: +0,15 – 0,20 п.п. к жирности</strong>
     </div>
-</div>
 
-<!-- PAGE 3 -->
-<div class="page">
-    <!-- 9. ИСХОДНЫЕ ДАННЫЕ И ПРОГНОЗ -->
+    <!-- 9. ИСХОДНЫЕ ДАННЫЕ -->
     <h2>📋 9️⃣ Исходные данные и Прогноз</h2>
     <table>
         <thead>
@@ -681,10 +668,10 @@
         ✅ <strong>Реалистичный прогноз:</strong> +2,0 – 2,5 л молока/ гол./ день и +0,15 – 0,20 п.п. к жирности.
     </div>
 
-    <!-- 10. КАЛЬКУЛЯТОР ЭКОНОМИКИ -->
+    <!-- 10. КАЛЬКУЛЯТОР -->
     <div class="calculator-section">
         <h2>🧮 10️⃣ Калькулятор экономики</h2>
-        <p style="font-size: 9pt; color: var(--text-light); margin: 0 0 15px 0;">Изменяйте параметры ниже. Все расчеты в документе адаптируются под новые значения.</p>
+        <p style="font-size: 8.5pt; color: var(--text-light); margin: 0 0 10px 0;">Изменяйте параметры ниже. Все расчеты в документе адаптируются под новые значения.</p>
         
         <div class="input-grid">
             <div class="input-group">
@@ -761,27 +748,26 @@
         </div>
     </div>
 
-    <!-- 11. КЛЮЧЕВЫЕ СООБЩЕНИЯ ДЛЯ КЛИЕНТА -->
+    <!-- 11. КЛЮЧЕВЫЕ СООБЩЕНИЯ -->
     <h2>🔑 11️⃣ Ключевые сообщения для клиента</h2>
     <div class="key-messages">
-        <p style="margin: 0 0 10px 0;"><strong>📦 Продукт:</strong> ОмегаПро (Беларусь)</p>
-        <p style="margin: 0 0 10px 0;"><strong>🎯 Норма ввода:</strong> <span id="textDosage2">1,2</span> кг/ гол./ день</p>
-        <p style="margin: 0 0 10px 0;"><strong>📈 Результаты за <span id="textDays2">65</span> дней (секция <span id="textHerd2">200</span> голов):</strong></p>
-        <ul style="margin: 10px 0;">
+        <p style="margin: 0 0 8px 0;"><strong>📦 Продукт:</strong> ОмегаПро (Беларусь)</p>
+        <p style="margin: 0 0 8px 0;"><strong>🎯 Норма ввода:</strong> <span id="textDosage2">1,2</span> кг/ гол./ день</p>
+        <p style="margin: 0 0 8px 0;"><strong>📈 Результаты за <span id="textDays2">65</span> дней (секция <span id="textHerd2">200</span> голов):</strong></p>
+        <ul style="margin: 8px 0;">
             <li>🥛 <strong>Прирост удоя:</strong> +1,5 – 2,0 л/ гол./ день</li>
             <li>🧈 <strong>Прирост жирности:</strong> +0,15 – 0,25 п.п. (с 3,70% до 3,85–3,95%)</li>
             <li>💎 <strong>Скрытые выгоды (репродукция + здоровье):</strong> +59 000 – 77 000 BYN</li>
             <li>✅ <strong>Чистый экономический эффект:</strong> +32 000 – 73 000 BYN</li>
             <li>📊 <strong>ROI:</strong> 138–185%</li>
         </ul>
-        <p style="margin: 15px 0 0 0; padding: 12px; background: white; border-radius: var(--radius-sm); border-left: 3px solid var(--accent-color);"><strong>Главная ценность:</strong><br>
+        <p style="margin: 12px 0 0 0; padding: 10px; background: white; border-radius: var(--radius-sm); border-left: 3px solid var(--accent-color);"><strong>Главная ценность:</strong><br>
         «Почти 60% прямой выручки формируется за счёт надбавки за жирность — качества, которое оплачивает переработчик. А долгосрочная окупаемость приходит через здоровье печени и раннюю репродукцию»</p>
     </div>
 </div>
 
 <script>
     function calculate() {
-        // Inputs
         const herdSize = parseFloat(document.getElementById('herdSize').value) || 0;
         const days = parseFloat(document.getElementById('days').value) || 0;
         const dosage = parseFloat(document.getElementById('dosage').value) || 0;
@@ -793,7 +779,6 @@
         const milkPriceBase = parseFloat(document.getElementById('milkPriceBase').value) || 0;
         const fatBonusRate = parseFloat(document.getElementById('fatBonusRate').value) || 0;
 
-        // Update Text Descriptions
         document.getElementById('textHerd').innerText = `${herdSize} голов (голштинская порода, 0–${days} дней лактации)`;
         document.getElementById('textDosage').innerText = `${dosage} кг/ гол./ день`;
         document.getElementById('textDays').innerText = `${days} дней`;
@@ -807,23 +792,13 @@
         document.getElementById('textDays2').innerText = days;
         document.getElementById('textHerd2').innerText = herdSize;
 
-        // Constants
-        const baseFatNorm = 3.6; // %
-
-        // Calculations
-        // 1. Cost
+        const baseFatNorm = 3.6;
         const totalCost = dosage * priceConcentrate * herdSize * days;
-
-        // 2. New Metrics
         const newYield = baseYield + yieldIncrease;
         const newFat = baseFat + fatIncrease;
         const totalMilkVolume = newYield * herdSize * days;
-
-        // 3. Revenue Calculation
-        // Revenue from Volume Increase (using base price)
         const revenueFromVolume = yieldIncrease * milkPriceBase * herdSize * days;
 
-        // Revenue from Fat Bonus
         let fatBonusPerLiter = 0;
         if (newFat > baseFatNorm) {
             const fatPointsOver = (newFat - baseFatNorm) / 0.1;
@@ -831,23 +806,13 @@
         }
         
         const revenueFromFat = fatBonusPerLiter * totalMilkVolume;
-
         const totalDirectRevenue = revenueFromVolume + revenueFromFat;
-
-        // 4. Indirect Effects (Scaled by herd size relative to base 200)
         const baseIndirect = 68000;
         const scale = herdSize / 200;
         const indirectRevenue = baseIndirect * scale;
+        const netProfit = (totalDirectRevenue + indirectRevenue) - totalCost;
+        let roi = totalCost > 0 ? (netProfit / totalCost) * 100 : 0;
 
-        // 5. Net Profit & ROI
-        const totalIncome = totalDirectRevenue + indirectRevenue;
-        const netProfit = totalIncome - totalCost;
-        let roi = 0;
-        if (totalCost > 0) {
-            roi = (netProfit / totalCost) * 100;
-        }
-
-        // Update UI
         document.getElementById('resCost').innerText = totalCost.toLocaleString('ru-RU', {style: 'currency', currency: 'BYN'});
         document.getElementById('resMilkVol').innerText = revenueFromVolume.toLocaleString('ru-RU', {style: 'currency', currency: 'BYN'});
         document.getElementById('resFatBonus').innerText = revenueFromFat.toLocaleString('ru-RU', {style: 'currency', currency: 'BYN'});
@@ -856,13 +821,7 @@
         
         const netProfitEl = document.getElementById('resNetProfit');
         netProfitEl.innerText = netProfit.toLocaleString('ru-RU', {style: 'currency', currency: 'BYN'});
-        
-        if(netProfit > 0) {
-            netProfitEl.style.color = "#2c7a4b";
-        } else {
-            netProfitEl.style.color = "#d9534f";
-        }
-
+        netProfitEl.style.color = netProfit > 0 ? "#2c7a4b" : "#d9534f";
         document.getElementById('resROI').innerText = roi.toFixed(0) + "%";
     }
 
